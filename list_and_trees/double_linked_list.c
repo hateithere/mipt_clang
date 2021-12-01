@@ -152,6 +152,9 @@ Data list_pop_back(struct Node * list) {
 }
 
 Data list_delete(struct Node * t) {
+	if (t == t->next) {
+		return 0;
+	}
 	t->prev->next = t->next;
 	t->next->prev = t->prev;
 	Data val = t->data;
@@ -182,17 +185,32 @@ Data list_sum (struct Node * list) {
 	return s;
 }
 
+int list_size(struct Node *list) {
+	struct Node *ptr = list->next;
+	if (ptr == list) {
+		return 0;
+	}
+	int len = 1;
+
+	while (ptr->next != list) {
+		ptr = ptr->next;
+		++len;
+	}
+	return len;
+}
 int main() {
 struct Node x[10];
 	struct Node * a = malloc(sizeof(struct Node));
-	struct Node * b = malloc(sizeof(struct Node));
+
 	int i;
 	list_init(a);
-	list_init(b);
+
 	
 	for(i=0; i<10; i++) {
 		x[i].data = i;
 		list_insert(a, &x[i]);
 	}
 	list_print(a);
+	while(list_delete(a->next));
+	free(a);
 }
