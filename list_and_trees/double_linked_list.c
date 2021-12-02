@@ -29,18 +29,9 @@ void sum(Data a, void * s);
 void list_init(struct Node * list) {
 	list->next = list;
 	list->prev = list;
-	list->data = 113;
+	list->data = -1;
 }
 
-/*void list_print (struct Node * list) {
-	if (list != list->next) {
-		list_for_each(list, print_it, stdout);
-		printf("\n");
-	}
-	else {
-		printf("Empty list\n");
-	}
-}*/
 void list_print (struct Node * list) {
 	struct Node *ptr = list->next;
 	if (ptr == list) {
@@ -120,11 +111,11 @@ int list_is_empty(struct Node * list) {
 int list_clear(struct Node * list) {
 	struct Node *ptr = list->next;
 	
-	struct Node *next;
+	struct Node *n;
 	while (ptr->next != list) {
-		next = ptr->next;
+		n = ptr->next;
 		free(ptr);
-		ptr = next;
+		ptr = n;
 	}
 	list->next = list;
 	list->prev = list;
@@ -153,7 +144,7 @@ Data list_pop_back(struct Node * list) {
 
 Data list_delete(struct Node * t) {
 	if (t == t->next) {
-		return 0;
+		return -1;
 	}
 	t->prev->next = t->next;
 	t->next->prev = t->prev;
@@ -211,6 +202,7 @@ struct Node x[10];
 		list_insert(a, &x[i]);
 	}
 	list_print(a);
-	while(list_delete(a->next));
+	//while(list_delete(a->next));
+	list_clear(a);
 	free(a);
 }

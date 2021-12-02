@@ -29,18 +29,9 @@ void sum(Data a, void * s);
 void list_init(struct Node * list) {
 	list->next = list;
 	list->prev = list;
-	list->data = 113;
+	list->data = -1;
 }
 
-/*void list_print (struct Node * list) {
-	if (list != list->next) {
-		list_for_each(list, print_it, stdout);
-		printf("\n");
-	}
-	else {
-		printf("Empty list\n");
-	}
-}*/
 void list_print (struct Node * list) {
 	struct Node *ptr = list->next;
 	if (ptr == list) {
@@ -120,12 +111,12 @@ int list_is_empty(struct Node * list) {
 int list_clear(struct Node * list) {
 	struct Node *ptr = list->next;
 	
-	struct Node *next;
+	struct Node *n;
 	while (ptr->next != list) {
-		next = ptr->next;
+		n = ptr->next;
 		free(ptr);
-		ptr = next;
-	}
+		ptr = n;
+	}	
 	list->next = list;
 	list->prev = list;
 	return 0;
@@ -152,8 +143,8 @@ Data list_pop_back(struct Node * list) {
 }
 
 Data list_delete(struct Node * t) {
-	if (t == t->next) {
-		return 0;
+	if (t->next == t) {
+		return -1;
 	}
 	t->prev->next = t->next;
 	t->next->prev = t->prev;
@@ -218,31 +209,35 @@ int main() {
 		scanf("%d", &B[i]);
 		list_push_back(b, B[i]);
 	}
-
-	for (i = 0; i<MAX; ++i) {
+	
+	for (i = 0;; ++i) {
+		if (i == MAX) {
+			printf("botva\n");
+			while(list_delete(a->next) != -1);
+			while(list_delete(b->next) != -1);
+			free(a); free(b);
+			return 0;
+		}
 		if (list_size(a) == 0) {
 			printf("second %d\n", i);
-			while(list_delete(a->next));
-			while(list_delete(b->next));
-			free(a);
-			free(b);
+			while(list_delete(b->next) != -1);
+			free(a); free(b);
 			return 0;
 		}
 		if (list_size(b) == 0) {
 			printf("first %d\n", i);
-			while(list_delete(a->next));
-			while(list_delete(b->next));
-			free(a);
-			free(b);
+			while(list_delete(a->next) != -1);
+			free(a); free(b);
 			return 0;
 		}
 		k = list_pop_front(a);
 		l = list_pop_front(b);
-		if (k == 10 || l == 0) {
+		
+		if ((k == 9) && (l == 0)) {
 			list_push_back(b, k);
 			list_push_back(b, l);		
 		}
-		else if (k == 0 || l == 10) {
+		else if ((k == 0) && (l == 9)) {
 			list_push_back(a, k);
 			list_push_back(a, l);
 		}
@@ -255,10 +250,4 @@ int main() {
 			list_push_back(b, l);	
 		}
 	}
-	printf("botva\n");
-	while(list_delete(a->next));
-	while(list_delete(b->next));
-	free(a);
-	free(b);
-	return 0;
 }
