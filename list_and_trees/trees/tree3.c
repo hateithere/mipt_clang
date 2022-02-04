@@ -73,20 +73,15 @@ unsigned int tree_height(struct Node * tree){
 	return 0;
 }
 int main() {
+	int i;
+
 	struct Node * tree = NULL;
-	tree = tree_add(tree, 7);
-	//printf("Tree - [%p]\n", tree);
-	tree = tree_add(tree, 3);
-	//printf("Tree - [%p]\n", tree);
-	tree = tree_add(tree, 2);
-	tree = tree_add(tree, 1);
-	tree = tree_add(tree, 9);
-	tree = tree_add(tree, 5);
-	tree = tree_add(tree, 4);
-	tree = tree_add(tree, 6);
-	tree = tree_add(tree, 8);
-	//printf("Tree - [%p]\n", tree);
-	tree_print(tree);
-	printf("Tree height - %d\n", tree_height(tree));
+	scanf("%d", &i);
+	while (i) {
+		tree = tree_add(tree, i);
+		scanf("%d", &i);	
+	}
+
+	printf("%d\n", tree_height(tree));
 	tree_destroy(tree);
 } 
