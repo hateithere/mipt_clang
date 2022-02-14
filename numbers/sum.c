@@ -24,11 +24,11 @@ int main(int argc, char *argv[]) {
 	int len = strlen(z);
 	int res = 0;
 	for (int i = len-1; i >= 0; --i) {
-		if (z[i]>=48 && z[i]<=57) {
+		if (z[i]>='0' && z[i]<='9') {
 			res += (z[i] - '0') * pow_(27, len-i-1);	
 		}
 		else {
-			res += (z[i] - 54) * pow_(27, len-i-1);
+			res += (z[i] - 'A' + 10) * pow_(27, len-i-1);
 		}
 	}
 	printf("%.3f\n", x+y+res);
