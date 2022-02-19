@@ -4,7 +4,7 @@
 int main() {
 	char a[1001] = "";
 	char b[1001] = "";
-	char res[1002] = ""
+	char res[1002] = "";
 	char null = 0;
 	int len, len_;
 	int i, j;
