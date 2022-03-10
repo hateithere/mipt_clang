@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
-//#define _DEBUG
+
 int check_registers(int a, int b, int max_reg);
 int main() {
 	int max_reg = 4;
