@@ -1,46 +1,153 @@
 # zero
 
 ```
-xor eax, eax
+xor %eax, %eax
 ```
 
 # one
 ```
-xor eax, eax
-inc eax
+xor %eax, %eax
+inc %eax
 ```
 
 # next
 ```
-inc ax
+inc %ax
 ```
 
 # prev
 ```
-dec ax
+dec %ax
 ```
 
 # sum
 ```
-mov dx, ax
-add dx, bx
+mov %ax, %dx
+add %bx, %dx
 ```
 
 # sub
 ```
-mov rdx, rax
-sub rdx, rbx
+mov %rax, %rdx
+sub %rbx, %rdx
 ```
 
 # imul
 ```
-imul bl
-mov dx, ax
+imul %bl
+mov %ax, %dx
 ```
 
 # idiv
 ```
 cwd
-idiv bx
-mov dx, ax 
+idiv %bx
+mov %ax, %dx 
+```
+
+# lea
+```
+lea (%rax, %rbx, 8), %rdx
+```
+
+# lea1
+```
+lea (%rax, %rax, 4), %rdx
+```
+
+# lea32
+```
+lea (%eax, %ebx, 8), %edx
+```
+
+# egalite
+```
+cmp %ax, %bx
+jne nya
+mov $1, %dx
+jmp nya_
+nya:
+mov $0, %dx
+nya_:
+```
+
+# factorial
+```
+xor %edx, %edx
+inc %edx
+cmp $0, %al
+je end
+mov %al, %cl
+mov %ecx, %eax
+loop:
+cmp $1, %ecx
+mov %eax, %edx
+jle end
+dec %ecx
+mul %ecx
+jmp loop
+end:
+```
+
+# factorial64
+```
+xor %rdx, %rdx
+inc %rdx
+cmp $0, %al
+je end
+mov %al, %cl
+mov %rcx, %rax
+loop:
+cmp $1, %rcx
+mov %rax, %rdx
+jle end
+dec %rcx
+mul %rcx
+jmp loop
+end:
+```
+# antifa
+```
+xor %ecx, %ecx
+inc %ecx
+loop:
+cmp $1, %eax
+je end
+inc %ecx
+cdq
+div %ecx
+jmp loop
+end:
+mov %ecx, %ebx
+```
+
+# antifa64
+```
+xor %rcx, %rcx
+inc %rcx
+loop:
+cmp $1, %rax
+je end
+inc %rcx
+cqo
+div %rcx
+jmp loop
+end:
+mov %rcx, %rbx
+```
+
+# vector
+```
+xor %rbx, %rbx
+cmp $0, %rcx
+je end
+dec %rcx
+loop:
+lea (%rax, %rcx, 8), %rdx
+add (%rdx), %rbx
+dec %rcx
+cmp $-1, %rcx
+je end
+jmp loop
+end:
 ```
