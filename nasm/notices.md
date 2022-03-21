@@ -41,14 +41,14 @@ result in eax register (number of printed arguments)
 * x resb(w/d/q) 1
 * В глобальных переменных - нуль (по умолчанию)
 * section (segment - устар.) 
-	```
+```
 	.text (код)
 	.data (иниц. данные)
 	.rdata (константы)
 	.bss (неиниц. данные)
-	```
+```
 * .bss хранится в виде размера (выделяется в момент запуска)
-	```
+```
 	section .text
 		push
 		push
@@ -57,11 +57,13 @@ result in eax register (number of printed arguments)
 		str db '%d',0
 	section .bss
 		x resd 1
-	```
+```
+
 * global (например, main)
-	```
-	global main
-	```
+
+```
+global main
+```
 * Добавляет подчеркивания к меткам, _main, например (M$ only)
 * Вместо линковки вызываем gcc (gcc знает, где стандартная библиотека)
 * Конвенция fastcall (часть аргументов через регистры, 6 регистров для Linux, в прямом порядке, прочее - в стек в обратном)
