@@ -80,8 +80,8 @@ je end
 mov %al, %cl
 mov %ecx, %eax
 loop:
-cmp $1, %ecx
 mov %eax, %edx
+cmp $1, %ecx
 jle end
 dec %ecx
 mul %ecx
@@ -98,8 +98,8 @@ je end
 mov %al, %cl
 mov %rcx, %rax
 loop:
-cmp $1, %rcx
 mov %rax, %rdx
+cmp $1, %rcx
 jle end
 dec %rcx
 mul %rcx
